@@ -10,6 +10,7 @@ export default function Table() {
     getPlanetsList();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const filteredByName = planets.filter((planet) => planet.name.includes(name));
 
   return (
