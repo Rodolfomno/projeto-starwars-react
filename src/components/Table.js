@@ -3,12 +3,14 @@ import planetsContext from '../context/planetsContext';
 import TableHeader from './TableHeader';
 import TableRows from './TableRows';
 
-function Table() {
-  const { planets, getPlanetsList } = useContext(planetsContext);
+export default function Table() {
+  const { planets, getPlanetsList, name } = useContext(planetsContext);
 
   useEffect(() => {
     getPlanetsList();
-  }, [getPlanetsList]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const filteredByName = planets.filter((planet) => planet.name.includes(name));
 
   return (
     <table border="1">
@@ -16,10 +18,8 @@ function Table() {
         <TableHeader />
       </thead>
       <tbody>
-        {planets.map((planet) => TableRows(planet))}
+        {filteredByName && filteredByName.map((planet) => TableRows(planet))}
       </tbody>
     </table>
   );
 }
-
-export default Table;

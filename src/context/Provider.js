@@ -5,16 +5,16 @@ import planetsAPI from '../services/services';
 
 export default function Provider({ children }) {
   const [planets, setPlanets] = useState([]);
+  const [name, setName] = useState('');
 
   async function getPlanetsList() {
     const allPlanetsList = await planetsAPI();
     const planetsList = allPlanetsList.results;
-    console.log(planetsList);
     setPlanets(planetsList);
   }
 
   return (
-    <planetsContext.Provider value={ { planets, getPlanetsList } }>
+    <planetsContext.Provider value={ { planets, getPlanetsList, name, setName } }>
       { children }
     </planetsContext.Provider>
   );
