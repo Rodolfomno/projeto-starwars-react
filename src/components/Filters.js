@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import planetsContext from '../context/planetsContext';
-
-const column1 = ['population', 'orbital_period',
-  'diameter', 'rotation_period', 'surface_water'];
 
 export default function Filters() {
   const { type, setType, comparison, setComparison,
     value, setValue, planets, setPlanets } = useContext(planetsContext);
+
+  const [column1, setColumn1] = useState(['population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water']);
 
   function handleClick() {
     if (comparison === 'maior que') {
@@ -19,6 +19,7 @@ export default function Filters() {
       setPlanets(planets
         .filter((planet) => (Number(planet[type]) === Number(value))));
     }
+    setColumn1(column1.filter((sub) => sub !== type));
   }
   return (
     <form>
